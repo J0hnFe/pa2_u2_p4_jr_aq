@@ -165,4 +165,64 @@ public class EstudianteRepoImpl implements EstudianteRepo {
 		return queryFinal.getSingleResult();
 	}
 
+	@Override
+	public Estudiante seleccionarEstudianteDinamico(String nombre, String apellido, Double peso) {
+		CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
+		CriteriaQuery<Estudiante> criteriaQuery = builder.createQuery(Estudiante.class);
+		Root<Estudiante> myTablaFrom = criteriaQuery.from(Estudiante.class); // FROM estudiante
+		
+		//3. Construir condiciones
+		//> 100 e.nombre = AND e.apellido =
+		//<= 100 e.nombre = OR e.apellido = ?
+		Predicate pNombre = builder.equal(myTablaFrom.get("nombre"), nombre);
+		Predicate pApellido = builder.equal(myTablaFrom.get("apellido"), apellido);
+
+		//AND Y OR SON OTRO PREDICADO EN FUNCION AL PESO
+		Predicate predicadoFinal=null;
+		if(peso.compareTo(Double.valueOf(100))<=0) {
+			
+			predicadoFinal=builder.or(pNombre,pApellido);
+			
+		}else {
+			predicadoFinal=builder.and(pNombre,pApellido);
+		}
+		
+		criteriaQuery.select(myTablaFrom).where(predicadoFinal);
+
+		//5. Ejecucion del query realizamos con TypedQuery
+		TypedQuery<Estudiante> queryFinal = this.entityManager.createQuery(criteriaQuery); //:o
+		
+		return queryFinal.getSingleResult();
+		
+		
+	}
+
+	@Override
+	public int eliminarPorNombre(String nombre) {
+		//DELETE FROM estudiante WHERE estu_nombre = ?
+		//DELETE FROM Estudiante e WHERE e.nombre = :datoNombre
+		
+		Query query = this.entityManager.createQuery("DELETE FROM Estudiante e WHERE e.nombre = :datoNombre");
+		query.setParameter("datoNombre", nombre);
+		return query.executeUpdate();
+		
+	}
+
+	@Override
+	public int actualizarPorApellido(String nombre,String apellido) {
+		// TODO Auto-generated method stub
+		//SQL
+		//UPDATE estudiante SET estu_nombre =? WHERE estu_apellido
+		//JPQL
+		// UPDATE Estudiante e SET e.nombre= :datoNombre WHERE e.apellido = :datoApellido
+		Query query = this.entityManager.createQuery("UPDATE Estudiante e SET e.nombre= :datoNombre WHERE e.apellido = :datoApellido");
+		query.setParameter("datoNombre", nombre);
+		query.setParameter("datoApellido", apellido);
+		return query.executeUpdate();
+		
+	
+		
+		
+	}
+
 }

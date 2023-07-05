@@ -53,16 +53,22 @@ public class Estudiante {
 
 	@Column(name = "estu_apellido")
 	private String apellido;
-
+	@Column(name = "estu_peso")
+	private Double peso;
+	
+	
 	// toString
-	@Override
-	public String toString() {
-		return "Estudiante [nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula + "]";
-	}
+	
 
 	// Getters y Setters
 	public String getNombre() {
 		return nombre;
+	}
+
+	@Override
+	public String toString() {
+		return "Estudiante [id=" + id + ", cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido
+				+ ", peso=" + peso + "]";
 	}
 
 	public void setNombre(String nombre) {
@@ -84,4 +90,13 @@ public class Estudiante {
 	public void setCedula(String cedula) {
 		this.cedula = cedula;
 	}
+
+	public Double getPeso() {
+		return peso;
+	}
+
+	public void setPeso(Double peso) {
+		this.peso = peso;
+	}
+	
 }
