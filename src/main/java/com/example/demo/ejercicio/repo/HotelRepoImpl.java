@@ -34,5 +34,12 @@ public class HotelRepoImpl implements IHotelRepo{
 	public void eliminar(Integer id) {
 		this.entityManager.remove(id);
 	}
+
+	@Override
+	public void seleccionarTodos() {
+		this.entityManager.toString();
+	}
+	
+	
 	
 }

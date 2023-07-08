@@ -1,5 +1,7 @@
 package com.example.demo.ejercicio.repo;
 
+import java.util.List;
+
 import com.example.demo.ejercicio.repo.modelo.Habitacion;
 
 public interface IHabitacionRepo {

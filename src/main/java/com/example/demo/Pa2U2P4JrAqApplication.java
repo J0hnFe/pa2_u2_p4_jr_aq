@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,17 +8,26 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.example.demo.ejercicio.repo.modelo.Hotel;
+import com.example.demo.ejercicio.service.IHotelService;
+import com.example.demo.repository.modelo.Alumno;
 import com.example.demo.repository.modelo.Estudiante;
+import com.example.demo.repository.modelo.Materia;
+import com.example.demo.repository.modelo.Matricula;
+import com.example.demo.repository.modelo.dto.MatriculaDTO;
 import com.example.demo.service.EstudianteService;
+import com.example.demo.service.MatriculaService;
 
 @SpringBootApplication
 public class Pa2U2P4JrAqApplication implements CommandLineRunner {
 	@Autowired
 	private EstudianteService estudianteService;
-
-	/*
-	 * @Autowired private CtaBancariaService bancariaService;
-	 */
+	
+	@Autowired
+	private MatriculaService matriculaService;
+	
+	@Autowired
+	private IHotelService hotelService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Pa2U2P4JrAqApplication.class, args);
@@ -25,15 +35,32 @@ public class Pa2U2P4JrAqApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		
+//		Alumno alumno = new Alumno();
+//		alumno.setNombre("Roberto");
+//		
+//		Alumno alumno2 = new Alumno();
+//		alumno2.setNombre("Lucia");
+//		
+//		Materia materia = new Materia();
+//		materia.setNombre("Mates");
+		
+//		Matricula matricula = new Matricula();
+//		matricula.setAlumno(alumno);
+//		matricula.setMateria(materia);
+//		matricula.setFecha(LocalDateTime.now());
+//		matricula.setNumero("1234");
+//		this.matriculaService.agregar(matricula);
 
 		Estudiante estudiante = new Estudiante();
 		estudiante.setNombre("John");
-		estudiante.setApellido("Quisilema");
+		estudiante.setApellido("Ramos");
 		estudiante.setCedula("1721");
 		estudiante.setPeso(Double.valueOf(101));
-		// this.estudianteService.agregar(estudiante);
-		// Estudiante estudianteE = this.estudianteService.buscarPorApellido("Ramos");
-		// System.out.println(estudianteE.getApellido());
+//		this.estudianteService.agregar(estudiante);
+		
+//		Estudiante estudianteE = this.estudianteService.buscarPorApellido("Ramos");
+//		System.out.println(estudianteE.getApellido());
 		Estudiante estudiante2 = new Estudiante();
 		estudiante2.setNombre("Anddy");
 		estudiante2.setApellido("Quisilema");
@@ -41,62 +68,22 @@ public class Pa2U2P4JrAqApplication implements CommandLineRunner {
 		estudiante2.setPeso(Double.valueOf(90));
 
 		Estudiante estudiante3 = new Estudiante();
-		estudiante3.setNombre("Felipe");
-		estudiante3.setApellido("Ramos");
+		estudiante3.setNombre("Margot");
+		estudiante3.setApellido("Robbie");
 		estudiante3.setCedula("1001");
 		estudiante3.setPeso(Double.valueOf(200));
-		// this.estudianteService.agregar(estudiante2);
-		// this.estudianteService.agregar(estudiante3);
-		/*
-		 * List<Estudiante> estudiantes=
-		 * this.estudianteService.buscarListaPorApellido("Quisilema");
-		 * System.out.println(estudiantes + "\n"); //estudiantes.stream().forEach(sy);
-		 * 
-		 * Estudiante estudianteNyA=
-		 * this.estudianteService.buscarPorApellidoyNombre("Quisilema", "Anddy");
-		 * 
-		 * System.out.println(estudianteNyA);
-		 * 
-		 * Estudiante estuATyped =
-		 * this.estudianteService.buscarPorApellidoTyped("Ramos");
-		 * System.out.println(estuATyped);
-		 * 
-		 * Estudiante estudianteNMQ =
-		 * this.estudianteService.buscarPorApellidoNamedQuery("Ramos");
-		 * System.out.println("Estu NQ encontrado = " + estudianteNMQ);
-		 * 
-		 * Estudiante estudianteN =
-		 * this.estudianteService.buscarPorApellidoNamed("Ramos");
-		 * System.out.println("estu named encontrado = " + estudianteN);
-		 * 
-		 * Estudiante estudianteNati=
-		 * this.estudianteService.buscarPorApellidoNativeQuery("Ramos");
-		 * System.out.println("Estudiante native " + estudianteNati);
-		 * 
-		 * Estudiante
-		 * estudianteNNQ=this.estudianteService.buscarPorApellidoNativeQueryNamed(
-		 * "Ramos"); System.out.println(estudianteNNQ);
-		 * 
-		 * Estudiante
-		 * estudianteNatiNom=this.estudianteService.buscarPorNombreNativeQuery("Felipe")
-		 * ; System.out.println(estudianteNatiNom);
-		 * 
-		 * Estudiante
-		 * estudianteNatiNamesNom=this.estudianteService.buscarPorNombreNativeQueryNamed
-		 * ("Felipe"); System.out.println(estudianteNatiNamesNom);
-		 * 
-		 */
+//		this.estudianteService.agregar(estudiante2);
+//		this.estudianteService.agregar(estudiante3);
 
-		Estudiante estudianteDinamico = this.estudianteService.buscarEstudianteDinamico("Felipe", "Ramos",
-				Double.valueOf(110));
-		System.out.println(estudianteDinamico);
+//		List<EstudianteDTO> estudiantes = this.estudianteService.buscarTodosDTO();
+//		estudiantes.stream().forEach(System.out::println);
 		
-//		Integer intAux = this.estudianteService.borrarPorNombre("John");
-//		System.out.println(intAux);
+//		List<MatriculaDTO> matriculas = this.matriculaService.buscarTodosDTO();
+//		matriculas.stream().forEach(System.out::println);
+//		System.out.println(matriculas);
 		
-		Integer intAux = this.estudianteService.actualizarPorApellido("Rafael", "Quisilema");
-		System.out.println(intAux);
-		
+//		List<Hotel> hotels = this.hotelService.
+
 	}
 
 }

@@ -10,4 +10,6 @@ public interface IHotelRepo {
 	public Hotel seleccionar(Integer id);
 	public void eliminar(Integer id);
 	
+	public void seleccionarTodos();
+	
 }
